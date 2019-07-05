@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.swusemiproject2019">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -9,7 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <!-- 카메라 사용을 위한 Provider 선언 -->
+        <provider
+            android:authorities="com.example.swusemiproject2019"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+
+        <activity android:name=".activity.ModifyActivity"></activity>
+        <!--<activity android:name=".fragment.FragmentCamera" />-->
+        <!--<activity android:name=".fragment.FragmentMember" />-->
+        <!--<activity android:name=".fragment.FragmentMemoWrite" />-->
+        <activity android:name=".activity.NewMemoActivity" />
+        <!--<activity android:name=".fragment.FragmentMemo" />-->
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.JoinActivity" />
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

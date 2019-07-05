@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".fragment.FragmentMemo">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <Button
+        android:id="@+id/btnNewMemo"
         android:layout_width="match_parent"
-        android:layout_height="64dp"></com.google.android.material.tabs.TabLayout>
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="새메모 작성"
+        android:textSize="25dp" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"></LinearLayout>
+
 </LinearLayout>
