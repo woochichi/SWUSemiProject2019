@@ -14,9 +14,8 @@ import com.example.swusemiproject2019.R;
 
 public class FragmentCamera extends Fragment {
 
-    public FragmentCamera(){
+    public String mPhotoPath = "/sdcard/hello/world.jpg"; //dummy data
 
-    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

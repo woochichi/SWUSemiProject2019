@@ -15,30 +15,30 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout; //tab 영역
-    private ViewPager viewPager; //tab별 표시할 영역
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        mTabLayout = findViewById(R.id.tabLayout);
+        mViewPager = findViewById(R.id.viewPager);
 
         //tab 생성
-        tabLayout.addTab(tabLayout.newTab().setText("메모"));
-        tabLayout.addTab(tabLayout.newTab().setText("회원정보"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTabLayout.addTab(mTabLayout.newTab().setText("메모"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("회원정보"));
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        //ViewPager 생성
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
+
+        mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                mViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -54,14 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    class MyPagerAdapter extends FragmentPagerAdapter{
-        int tabSize; //탭의 수
+    class ViewPagerAdapter extends FragmentPagerAdapter{
+        private int tabCount;
 
-        public MyPagerAdapter(FragmentManager fm,int count){
+        public ViewPagerAdapter(FragmentManager fm, int count){
             super(fm);
-            this.tabSize = count; //탭의 수
+            this.tabCount = count;
         }
-
 
         @Override
         public Fragment getItem(int position) {
@@ -70,14 +69,13 @@ public class MainActivity extends AppCompatActivity {
                     return new FragmentMemo();
                 case 1:
                     return new FragmentMember();
-
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return this.tabSize;
+            return tabCount;
         }
     }
 }

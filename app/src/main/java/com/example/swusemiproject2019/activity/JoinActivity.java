@@ -1,6 +1,7 @@
 package com.example.swusemiproject2019.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -15,6 +16,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,15 +26,15 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class JoinActivity extends Activity {
+public class JoinActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSION_CAMERA = 1111;
     private static final int REQ_TAKE_PHOTO = 2222;
     private static final int REQ_TAKE_ALBUM = 3333;
     private static final int REQ_TAKE_IMAGE_CROP = 4444;
 
-    private ImageView imgview;
-    Button btnCamera;
+    private ImageView mImgProfile;
+    private EditText mEdtId, mEdtName, mEdtPw1, mEdtPw2;
 
 
     private String mCurrentImageFilePath = null;
@@ -49,24 +51,26 @@ public class JoinActivity extends Activity {
         setContentView(R.layout.activity_join);
 
 
-        imgview = (ImageView) findViewById(R.id.imgview);
-        btnCamera = (Button) findViewById(R.id.btnCamera);
+        mImgProfile = (ImageView) findViewById(R.id.imgProfile);
+        mEdtId = findViewById(R.id.edtId);
+        mEdtName = findViewById(R.id.edtName);
+        mEdtPw1 = findViewById(R.id.edtPw1);
+        mEdtPw2 = findViewById(R.id.edtPw2);
 
-        btnCamera.setOnClickListener(new View.OnClickListener(){
+        //카메라 버튼
+        findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 captureCamera();
 
             }
         });
-
-        //회원가입 버튼
-        Button btnRegReg = findViewById(R.id.btnRegReg);
-        btnRegReg.setOnClickListener(new View.OnClickListener() {
+        //회원가입 버튼튼
+        findViewById(R.id.btnJoin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                joinProcess();
+
             }
         });
 
@@ -168,7 +172,7 @@ public class JoinActivity extends Activity {
             case REQ_TAKE_PHOTO:
                 if (resultCode == Activity.RESULT_OK) {
 
-                    imgview.setImageURI(mProviderUri); // 사진촬영한 이미지 설정
+                    mImgProfile.setImageURI(mProviderUri); // 사진촬영한 이미지 설정
 
                 } else {
                     Toast.makeText(this, "사진촬영을 취소하였습니다.", Toast.LENGTH_LONG).show();
@@ -180,7 +184,7 @@ public class JoinActivity extends Activity {
                     mPhotoUri = data.getData();
                     mAlbumUri = Uri.fromFile(albumFile);
 
-                    imgview.setImageURI(mPhotoUri);   // 앨범에서 선택한 이미지 설정
+                    mImgProfile.setImageURI(mPhotoUri);   // 앨범에서 선택한 이미지 설정
                 }
                 break;
         }

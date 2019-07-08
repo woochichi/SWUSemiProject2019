@@ -36,7 +36,7 @@
             android:text="6조" />
 
         <EditText
-            android:id="@+id/Idtxt"
+            android:id="@+id/mEdtId"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
@@ -49,7 +49,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/passwordtxt"
+            android:id="@+id/mEdtPw"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
@@ -77,7 +77,7 @@
                 android:text="로그인" />
 
             <Button
-                android:id="@+id/btnReg"
+                android:id="@+id/btnJoin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
